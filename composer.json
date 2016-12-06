@@ -9,6 +9,12 @@
             "email": "hello@ricko.me"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Riari/laravel-forum-frontend"
+        }
+    ],
     "require": {
         "php": ">=5.4.0",
         "riari/laravel-forum": "3.0 - 4.0"
