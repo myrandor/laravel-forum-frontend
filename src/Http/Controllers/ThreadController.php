@@ -208,7 +208,7 @@ class ThreadController extends BaseController
      */
     public function bulkUpdate(Request $request)
     {
-        $this->validate($request, ['action' => 'in:restore,move,pin,unpin,lock,unlock']);
+        $this->validate($request, ['action' => 'in:restore,move,pin,unpin,lock,unlock,subscribe,unsubscribe']);
 
         $action = $request->input('action');
 
