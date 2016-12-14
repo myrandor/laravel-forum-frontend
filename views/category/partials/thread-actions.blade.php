@@ -4,6 +4,8 @@
         <div class="form-group">
             <label for="thread-action">{{ trans_choice('forum::general.actions', 1) }}</label>
             <select name="action" id="thread-action" class="form-control">
+                <option value="subscribe">{{ trans('forum::threads.subscribe_threads') }}</option>
+                <option value="unsubscribe">{{ trans('forum::threads.unsubscribe_threads') }}</option>
                 @can ('deleteThreads', $category)
                     <option value="delete" data-confirm="true" data-method="delete">{{ trans('forum::general.delete') }}</option>
                     <option value="restore" data-confirm="true">{{ trans('forum::general.restore') }}</option>

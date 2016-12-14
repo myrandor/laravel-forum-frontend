@@ -12,6 +12,9 @@
             @if ($thread->pinned)
                 <span class="label label-info">{{ trans('forum::threads.pinned') }}</span>
             @endif
+            @if ($thread->subscribeStatus)
+                <span class="label label-success">{{ trans('forum::general.subscribed') }}</span>
+            @endif
             {{ $thread->title }}
         </h2>
 
@@ -41,8 +44,12 @@
                     </div>
                 @endcan
             </div>
-            <div class="col-xs-8 text-right">
+            <div class="col-xs-8 text-right bottom-align-text">
                 {!! $posts->render() !!}
+                @if (!$thread->trashed())
+                    <label for="subscribe_thread">{{ trans('forum::threads.subscribe_thread') }}</label>&nbsp;
+                    <input type="checkbox" id="subscribe_thread" data-id="{{ $thread->id }}"{{ $thread->subscribeStatus ? ' checked="checked"' : '' }}>
+                @endif
             </div>
         </div>
 

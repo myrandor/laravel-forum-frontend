@@ -69,7 +69,9 @@
                     <tr>
                         <th>{{ trans('forum::general.subject') }}</th>
                         <th class="col-md-2 text-right">{{ trans('forum::general.replies') }}</th>
+                        {{--
                         <th class="col-md-2 text-right">{{ trans('forum::posts.last') }}</th>
+                        --}}
                         @can ('manageThreads', $category)
                             <th class="col-md-1 text-right"><input type="checkbox" data-toggle-all></th>
                         @endcan
@@ -88,10 +90,13 @@
                                             <span class="label label-info">{{ trans('forum::threads.pinned') }}</span>
                                         @endif
                                         @if ($thread->userReadStatus && !$thread->trashed())
-                                            <span class="label label-primary">{{ trans($thread->userReadStatus) }}</span>
+                                            <span class="label label-primary">{{ trans('forum::general.unread') }}</span>
                                         @endif
                                         @if ($thread->trashed())
                                             <span class="label label-danger">{{ trans('forum::general.deleted') }}</span>
+                                        @endif
+                                        @if ($thread->subscribeStatus)
+                                            <span class="label label-success">{{ trans('forum::general.subscribed') }}</span>
                                         @endif
                                     </span>
                                     <p class="lead">
@@ -100,16 +105,21 @@
                                     <p>{{ $thread->authorName }} <span class="text-muted">({{ $thread->posted }})</span></p>
                                 </td>
                                 @if ($thread->trashed())
+                                    {{--
                                     <td colspan="2">&nbsp;</td>
+                                    --}}
+                                    <td>&nbsp;</td>
                                 @else
                                     <td class="text-right">
                                         {{ $thread->reply_count }}
                                     </td>
+                                    {{--
                                     <td class="text-right">
                                         {{ $thread->lastPost->authorName }}
                                         <p class="text-muted">({{ $thread->lastPost->posted }})</p>
                                         <a href="{{ Forum::route('thread.show', $thread->lastPost) }}" class="btn btn-primary btn-xs">{{ trans('forum::posts.view') }} &raquo;</a>
                                     </td>
+                                    --}}
                                 @endif
                                 @can ('manageThreads', $category)
                                     <td class="text-right">
@@ -123,7 +133,10 @@
                             <td>
                                 {{ trans('forum::threads.none_found') }}
                             </td>
+                            {{--
                             <td class="text-right" colspan="3">
+                            --}}
+                            <td class="text-right" colspan="2">
                                 @can ('createThreads', $category)
                                     <a href="{{ Forum::route('thread.create', $category) }}">{{ trans('forum::threads.post_the_first') }}</a>
                                 @endcan
